@@ -1,10 +1,10 @@
 package com.augustine.task_manager.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.Generated;
+import org.hibernate.generator.EventType;
+
 
 import java.time.LocalDateTime;
 
@@ -28,9 +28,11 @@ public class Task {
     @Column(name = "completed")
     private boolean completed;
 
-    @Column(name = "created_at")
+    @Generated(event = EventType.INSERT)
+    @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Generated(event = {EventType.INSERT, EventType.UPDATE })
+    @Column(name = "updated_at", insertable = false, updatable = false)
     private LocalDateTime updatedAt;
 }
